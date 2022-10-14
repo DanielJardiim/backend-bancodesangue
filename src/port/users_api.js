@@ -45,7 +45,7 @@ module.exports = app => {
                 return res.status(500).json({ error: error });
             }
         } else {
-            return res.status(409).json({ msg: 'User Duplicate !' });
+            return res.json({ msg: 'User Duplicate !' });
         }
     });
 };
