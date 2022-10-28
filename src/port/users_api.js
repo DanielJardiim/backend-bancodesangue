@@ -51,49 +51,49 @@ module.exports = app => {
                 await User.create(userSchema);
 
                 if (tipoSanguineo === 'A+') {
-                    const Amais = ((++numAmais / 100) * 100).toFixed(2);
+                    const Amais = ((++numAmais / 1000) * 100).toFixed(2);
                     return res
                         .status(201)
                         .json({ msg: 'User create - OK', Amais });
                 }
                 if (tipoSanguineo === 'A-') {
-                    const Amenos = ((++numAmenos / 100) * 100).toFixed(2);
+                    const Amenos = ((++numAmenos / 1000) * 100).toFixed(2);
                     return res
                         .status(201)
                         .json({ msg: 'User create - OK', Amenos });
                 }
                 if (tipoSanguineo === 'B+') {
-                    const Bmais = ((++numBmais / 100) * 100).toFixed(2);
+                    const Bmais = ((++numBmais / 1000) * 100).toFixed(2);
                     return res
                         .status(201)
                         .json({ msg: 'User create - OK', Bmais });
                 }
                 if (tipoSanguineo === 'B-') {
-                    const Bmenos = ((++numBmenos / 100) * 100).toFixed(2);
+                    const Bmenos = ((++numBmenos / 1000) * 100).toFixed(2);
                     return res
                         .status(201)
                         .json({ msg: 'User create - OK', Bmenos });
                 }
                 if (tipoSanguineo === 'AB+') {
-                    const ABmais = ((++numABmais / 100) * 100).toFixed(2);
+                    const ABmais = ((++numABmais / 1000) * 100).toFixed(2);
                     return res
                         .status(201)
                         .json({ msg: 'User create - OK', ABmais });
                 }
                 if (tipoSanguineo === 'AB-') {
-                    const ABmenos = ((++numABmenos / 100) * 100).toFixed(2);
+                    const ABmenos = ((++numABmenos / 1000) * 100).toFixed(2);
                     return res
                         .status(201)
                         .json({ msg: 'User create - OK', ABmenos });
                 }
                 if (tipoSanguineo === 'O+') {
-                    const Omais = ((++numOmais / 100) * 100).toFixed(2);
+                    const Omais = ((++numOmais / 1000) * 100).toFixed(2);
                     return res
                         .status(201)
                         .json({ msg: 'User create - OK', Omais });
                 }
                 if (tipoSanguineo === 'O-') {
-                    const Omenos = ((++numOmenos / 100) * 100).toFixed(2);
+                    const Omenos = ((++numOmenos / 1000) * 100).toFixed(2);
                     return res
                         .status(201)
                         .json({ msg: 'User create - OK', Omenos });
