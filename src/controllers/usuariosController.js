@@ -1,5 +1,5 @@
 import NaoEncontrado from "../erros/NaoEncontrado.js";
-import { usuarios } from "../models/Usuario.js";
+import { usuarios } from "../models/index.js";
 
 class UsuarioController {
   static listarUsuarios = async (req, res, next) => {
