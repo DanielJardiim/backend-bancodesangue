@@ -12,7 +12,7 @@ class UsuarioController {
     }
   };
 
-  static listarUsuarioPorId = (async (req, res) => {
+  static listarUsuarioPorId = (async (req, res, next) => {
     
     try {
       const id = req.params.id;
@@ -21,7 +21,7 @@ class UsuarioController {
 
       res.status(200).send(usuarioResultado);
     } catch (error) {
-      res.status(400).send({message: `${error.message} - Usuario não encontrado`});
+      next(error);
     }   
 
   });

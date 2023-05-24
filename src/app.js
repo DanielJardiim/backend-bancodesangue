@@ -13,4 +13,10 @@ app.use(express.json());
 
 routes(app);
 
+//Middleware para interceptar qualquer erro identificado pela nossa aplicação em toda requisição da nossa API
+// eslint-disable-next-line no-unused-vars
+app.use((erro, req, res, next) => {
+  res.status(500).send({ message: "Erro interno do servidor"});
+});
+
 export default app;
