@@ -1,60 +1,72 @@
 import usuarios from "../models/Usuario.js";
 
 class UsuarioController {
-    static listarUsuarios = (req, res) => {
-        usuarios.find((err, usuarios) => {
-            res.status(200).json(usuarios);
-        })    
+  static listarUsuarios = async (req, res) => {
+    
+    try {
+      const usuariosResultado = await usuarios.find();
+      
+      res.status(200).json(usuariosResultado);      
+    } catch (error) {
+      res.status(500).json({ message: "Erro interno no servidor "});
     }
+  };
 
-    static listarUsuarioPorId = ((req, res) => {
-        const id = req.params.id;
+  static listarUsuarioPorId = (async (req, res) => {
+    
+    try {
+      const id = req.params.id;
 
-        usuarios.findById(id, (err, usuarios) => {
-            if(err) {
-                res.status(400).send({message: `${err.message} - Usuario não encontrado`})
-            } else {
-                res.status(200).send(usuarios)
-            }
-        })
+      const usuarioResultado = await usuarios.findById(id);
 
-    })
+      res.status(200).send(usuarioResultado);
+    } catch (error) {
+      res.status(400).send({message: `${error.message} - Usuario não encontrado`});
+    }   
 
-    static cadastrarUsuario = (req, res) => {
-        let usuario = new usuarios(req.body);
-        usuario.save((err) => {
-            if(err) {
-                res.status(500).send({message: `${err.message} - falha ao cadastrar Usuario.`})
-            } else {
-                res.status(201).send(usuario.toJSON())
-            }
-        })
+  });
+
+  static cadastrarUsuario = async (req, res) => {
+    
+    try {
+      let usuario = new usuarios(req.body);
+
+      const usuarioResultado = await usuarios.save(usuario);
+
+      res.status(201).send(usuarioResultado.toJSON());      
+    } catch (error) {
+      res.status(500).send({message: `${error.message} - falha ao cadastrar Usuario.`});
+    }   
+    
+  };
+
+  static atualizarUsuario = async (req, res) => {
+    
+    try {
+      const id = req.params.id;
+
+      await usuarios.findByIdAndUpdate(id, {$set: req.body});
+      
+      res.status(200).send({message: "Usuario atualizado com sucesso"});
+    } catch (error) {
+      res.status(500).send({message: `${error.message}- falha ao atualizar`});
     }
-
-    static atualizarUsuario = (req, res) => {
-        const id = req.params.id;
-
-        usuarios.findByIdAndUpdate(id, {$set: req.body}, (err) => {
-            if(!err) {
-                res.status(200).send({message: 'Usuario atualizado com sucesso'})
-            } else {
-                res.status(500).send({message: `${err.message}- falha ao atualizar`})
-            }
-        })
         
-    }
+  };
 
-    static excluirUsuario = (req, res) => {
-        const id = req.params.id
+  static excluirUsuario = async (req, res) => {
+    
+    try {
+      const id = req.params.id;
 
-        usuarios.findByIdAndDelete(id, (err) => {
-            if(!err) {
-                res.status(200).send({message: 'Usuario removido com sucesso'})
-            } else {
-                res.status(500).send({message: `${err.message} - erro ao deletar Usuario`})
-            }
-        })
+      await usuarios.findByIdAndDelete(id);
+
+      res.status(200).send({message: "Usuario removido com sucesso"});      
+    } catch (error) {
+      res.status(500).send({message: `${error.message} - erro ao deletar Usuario`});
     }
+    
+  };
     
 }
 
