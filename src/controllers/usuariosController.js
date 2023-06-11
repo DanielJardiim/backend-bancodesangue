@@ -2,7 +2,7 @@ import NaoEncontrado from "../erros/NaoEncontrado.js";
 import { usuarios } from "../models/index.js";
 
 class UsuarioController {
-  static listarUsuarios = async (req, res, next) => {
+  static listarUsuario = async (req, res, next) => {
     
     try {
       const usuariosResultado = await usuarios.find();
@@ -56,9 +56,9 @@ class UsuarioController {
       const usuarioResultado = await usuarios.findByIdAndUpdate(id, {$set: req.body});
 
       if (usuarioResultado !== null) {
-        res.status(200).send({message: "Usuario atualizado com sucesso"});
+        res.status(200).send({message: "usuario atualizado com sucesso"});
       } else {
-        next(new NaoEncontrado("Id do Usuario não localizado"));
+        next(new NaoEncontrado("Id da usuario não localizado"));
       }      
     } catch (error) {
       next(error);
@@ -74,7 +74,7 @@ class UsuarioController {
       const usuarioResultado = await usuarios.findByIdAndDelete(id);
 
       if(usuarioResultado !== null) {
-        res.status(200).send({message: "Usuario removido com sucesso"});
+        res.status(200).send({message: "usuario removido com sucesso"});
       } else {
         next(new NaoEncontrado("Id do Usuario não localizado"));
       }

@@ -1,5 +1,7 @@
 import express from "express";
-import usuarios from "./usuariosRoutes.js";
+import auth from "./authRoute.js";
+import pessoas from "./pessoasRoute.js";
+import usuarios from "./usuariosRoute.js";
 
 const routes = (app) => {
   app.route("/").get((req, res) => {
@@ -7,7 +9,9 @@ const routes = (app) => {
   });
 
   app.use(
-    express.json(),        
+    express.json(),
+    auth,           
+    pessoas,
     usuarios
   );
 };
