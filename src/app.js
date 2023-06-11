@@ -15,13 +15,13 @@ const app = express();
 
 app.use(express.json());
 
+routes(app);
+
 //Middlewares para interceptar os erros identificado pela nossa aplicação em toda requisição da nossa API
 app.use(manipulador404);
 
 app.use(manipuladorDeErros);
 
 app.use(autenticado);
-
-routes(app);
 
 export default app;
