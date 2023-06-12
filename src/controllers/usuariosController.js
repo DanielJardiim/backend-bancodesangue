@@ -2,14 +2,11 @@ import NaoEncontrado from "../erros/NaoEncontrado.js";
 import { usuarios } from "../models/index.js";
 
 class UsuarioController {
-  static listarUsuario = async (req, res, next) => {
-    
+  static listarUsuario = async (req, res, next) => {    
     try {
-      const usuariosResultado = await usuarios.find();
-      
-      req.resultado = usuariosResultado;
-      
-      next();
+      usuarios.find((err, autores) => {
+        res.status(200).json(autores);
+      });   
     } catch (error) {
       next(error);
     }
@@ -39,7 +36,7 @@ class UsuarioController {
     try {
       let usuario = new usuarios(req.body);
 
-      const usuarioResultado = await usuarios.save(usuario);
+      const usuarioResultado = await usuario.save();
 
       res.status(201).send(usuarioResultado.toJSON());      
     } catch (error) {

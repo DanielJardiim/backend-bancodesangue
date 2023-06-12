@@ -12,7 +12,10 @@ class AuthService {
   //Criando função para fazer login
   async login(dto) {
     const usuario = await usuarios.findOne({
-      email: dto.email
+      attributes: ["id", "email", "senha"],
+      where: {
+        email: dto.email
+      }
     });
 
     if(!usuario) {
@@ -20,8 +23,11 @@ class AuthService {
     }
 
     const senhasIguais = await bcrypt.compare(dto.senha, usuario.senha);
+    //console.log(dto.senha);
+    //console.log(usuario.senha);
+    //console.log(senhasIguais);
 
-    if(!senhasIguais) {
+    if(senhasIguais) {
       throw new Error("Usuario ou Senha incorreta");
     }
 

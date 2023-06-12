@@ -5,11 +5,9 @@ class PessoaController {
   static listarPessoas = async (req, res, next) => {
     
     try {
-      const pessoasResultado = await pessoas.find();
-      
-      req.resultado = pessoasResultado;
-      
-      next();
+      pessoas.find((err, autores) => {
+        res.status(200).json(autores);
+      });   
     } catch (error) {
       next(error);
     }

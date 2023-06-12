@@ -23,7 +23,7 @@ export default async(req, res, next) => {
     //Pega o token e traduz as informações que precisamos dele (id e email do usuario)
     const {id, email} = await jwt.decode(accessToken);
 
-    //Adicionando id e email na requisição
+    //Adicionando id e email na requisição para sabermos qual usuario esta realizando esta requisição
     req.usuarioId = id;
     req.usuarioEmail = email;
 
