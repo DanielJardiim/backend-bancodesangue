@@ -37,7 +37,7 @@ class PessoaController {
     try {
       let pessoa = new pessoas(req.body);
 
-      const pessoaResultado = await pessoas.save(pessoa);
+      const pessoaResultado = await pessoa.save();
 
       res.status(201).send(pessoaResultado.toJSON());      
     } catch (error) {

@@ -5,10 +5,10 @@ import paginar from "../middlewares/paginar.js";
 const router = express.Router();
 
 router
-  .get("/pessoas", PessoasController.listarPessoas, paginar)
-  .get("/pessoas/:id", PessoasController.listarPessoaPorId, paginar)
-  .post("/pessoas", PessoasController.cadastrarPessoa) 
-  .put("/pessoas/:id", PessoasController.atualizarPessoa)
-  .delete("/pessoas/:id", PessoasController.excluirPessoa);
+  .get("/doadores", PessoasController.listarPessoas, paginar)
+  .get("/doadores/:id", PessoasController.listarPessoaPorId, paginar)
+  .post("/doadores", PessoasController.cadastrarPessoa) 
+  .put("/doadores/:id", PessoasController.atualizarPessoa)
+  .delete("/doadores/:id", PessoasController.excluirPessoa);
 
 export default router;
