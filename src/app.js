@@ -1,9 +1,10 @@
 import express from "express";
 import db from "./config/dbConnect.js";
 import routes from "./routes/index.js";
-//import manipuladorDeErros from "./middlewares/manipuladorDeErros.js";
-//import manipulador404 from "./middlewares/manipulador404.js";
-//import autenticado from "./middlewares/autenticado.js";
+import manipuladorDeErros from "./middlewares/manipuladorDeErros.js";
+import manipulador404 from "./middlewares/manipulador404.js";
+import autenticado from "./middlewares/autenticado.js";
+import cors from "cors";
 
 
 db.on("error", console.log.bind(console, "Erro de conexão"));
@@ -13,15 +14,17 @@ db.once("open", () => {
 
 const app = express();
 
+app.use(cors());
+
 app.use(express.json());
 
 routes(app);
 
 //Middlewares para interceptar os erros identificado pela nossa aplicação em toda requisição da nossa API
-//app.use(manipulador404);
+app.use(manipulador404);
 
-//app.use(manipuladorDeErros);
+app.use(manipuladorDeErros);
 
-//app.use(autenticado);
+app.use(autenticado);
 
 export default app;
